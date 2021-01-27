@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunatic紫ダメージ計算</title>
+    <style>
+        
+        label{ margin-right: .5em; cursor: pointer; }
+        hr{ margin-top: 0.5em; margin-bottom: 0.5em; width: 700px; color: lithtgray;}
+    </style>
+</head>
+
+<body>
+    <div class="table group" style = "padding-left: 100px;">
+
+    <h1>東方LostWord Lunatic紫ダメージ計算</h1>
+
+        <table>
+            <!--キャラクターとレベル-->
+            <tr>
+                <td>キャラ</td>
+                <td>
+                    <select id="character">
+                        <option value="博麗霊夢">博麗霊夢</option>
+                        <option value="霧雨魔理沙">霧雨魔理沙</option>
+                        <option value="魂魄妖夢">魂魄妖夢</option>
+                        <option value="西行寺幽々子">西行寺幽々子</option>
+                        <option value="リリーホワイト">リリーホワイト</option>
+                    </select>
+                </td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>レベル</td>
+                <td><input id="level" type="number" value=100 style="width: 50px;"></td>
+            </tr>
+            <!--覚醒-->
+            <tr>
+                <td>ランク</td>
+                <td>
+                    <select id="rank">
+                        <option value=1>Rank1</option>
+                        <option value=2>Rank2</option>
+                        <option value=3>Rank3</option>
+                        <option value=4>Rank4</option>
+                        <option value=5>Rank5</option>
+                    </select>
+                </td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>覚醒</td>
+                <td>
+                    <select id="kakusei">
+                        <option value=1>☆1</option>
+                        <option value=2>☆2</option>
+                        <option value=3>☆3</option>
+                        <option value=4>☆4</option>
+                        <option value=5>☆5</option>
+                    </select>
+                </td>
+            </tr>
+
+        </table>
+
+        <table>
+            <!--ステータス-->
+            <tr><td><hr></td></tr>
+            <tr><td>★ステータス</td></tr>
+        </table>
+
+        <table>
+            <tr>
+                <td>体力</td>
+                <td><input id="tairyoku_chara" type="number" value=5000 style="width: 70px;"></td>
+                <td><input id="tairyoku_talisman" type="number" value=0 style="width: 70px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>速力</td>
+                <td><input id="sokuryoku_chara" type="number" value=0 style="width: 70px;"></td>
+                <td><input id="sokuryoku_talisman" type="number" value=1000 style="width: 70px;"></td>
+            </tr>
+            <tr>     
+                <td>陽攻</td>
+                <td><input id="youkou_chara" type="number" value=1000 style="width: 70px;"></td>
+                <td><input id="youkou_talisman" type="number" value=0 style="width: 70px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>陰攻</td>
+                <td><input id="inkou_chara" type="number" value=1000 style="width: 70px;"></td>
+                <td><input id="inkou_talisman" type="number" value=0 style="width: 70px;"></td>
+            </tr>
+            <tr>
+                <td>陽防</td>
+                <td><input id="youbou_chara" type="number" value=1000 style="width: 70px;"></td>
+                <td><input id="youbou_talisman" type="number" value=0 style="width: 70px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>陰防</td>
+                <td><input id="inbou_chara" type="number" value=1000 style="width: 70px;"></td>
+                <td><input id="inbou_talisman" type="number" value=0 style="width: 70px;"></td>
+            </tr>
+        </table>
+        <table><tr><td><hr></td></tr></table>
+        <table>
+            <!--攻撃バフ-->
+            <tr>
+                <td>★攻撃バフ</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>陽攻</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>陰攻</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>命中</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>クリ攻撃</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>クリ命中</td>
+            </tr>
+            <tr>
+                <td>スキルによる上昇</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="you_up_skill" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="inn_up_skill" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="meityu_up_skill" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="cri_kou_up_skill" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="cri_meityu_up_skill" type="number" value=0 style="width: 50px;"></td>
+            </tr>
+            <tr>
+                <td>スペカによる上昇</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="you_up_spell" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="inn_up_spell" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="meityu_up_spell" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="cri_kou_up_spell" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="cri_meityu_up_spell" type="number" value=0 style="width: 50px;"></td>
+            </tr>
+            <tr>
+                <td>絵札による上昇</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="you_up_talisman" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="inn_up_talisman" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="meityu_up_talisman" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="cri_kou_up_talisman" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="cri_meityu_up_talisman" type="number" value=0 style="width: 50px;"></td>
+            </tr>
+        </table>
+        <table><tr><td><hr></td></tr></table>
+        <table>    
+            <!--防御デバフ-->
+            <tr>
+                <td>★防御デバフ</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>陽防</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>陰防</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>回避</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>クリ防御</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>クリ回避</td>
+            </tr>
+            <tr>
+                <td>スキルによる低減</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="you_down_skill" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="inn_down_skill" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="kaihi_down_skill" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="cri_bou_down_skill" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="cri_kaihi_down_skill" type="number" value=0 style="width: 50px;"></td>
+            </tr>
+            <tr>
+                <td>スペカによる低減</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="you_down_spell" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="inn_down_spell" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="kaihi_down_spell" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="cri_bou_down_spell" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="cri_kaihi_down_spell" type="number" value=0 style="width: 50px;"></td>
+            </tr>
+            <tr>
+                <td>絵札による低減</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="you_down_talisman" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="inn_down_talisman" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="kaihi_down_talisman" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="cri_bou_down_talisman" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="cri_kaihi_down_talisman" type="number" value=0 style="width: 50px;"></td>
+            </tr>
+        </table>
+        <table><tr><td><hr></td></tr></table>
+        <table>
+            <!--絵札-->
+            <tr><td>★絵札効果による威力上昇</td></tr>
+        </table>
+        <table>
+            <form id="talismanGroup">
+            <tr>
+                <td>①</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                    <label><input type="radio" name="talisman" value=0 checked>無</label>
+                    <label><input type="radio" name="talisman" value=1>日</label>
+                    <label><input type="radio" name="talisman" value=2>月</label>
+                    <label><input type="radio" name="talisman" value=3>火</label>
+                    <label><input type="radio" name="talisman" value=4>水</label>
+                    <label><input type="radio" name="talisman" value=5>木</label>
+                    <label><input type="radio" name="talisman" value=6>金</label>
+                    <label><input type="radio" name="talisman" value=7>土</label>
+                    <label><input type="radio" name="talisman" value=8>星</label>    
+                </td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>上昇率（％）</td>
+                <td><input id="talisman_up" type="number" value=0 style="width: 50px;"></td>
+            </tr>
+            </form>
+        </table>
+        <table>
+            <form id="talismanGroup2">
+            <tr>
+                <td>②</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                    <label><input type="radio" name="talisman2" value=0 checked>無</label>
+                    <label><input type="radio" name="talisman2" value=1>日</label>
+                    <label><input type="radio" name="talisman2" value=2>月</label>
+                    <label><input type="radio" name="talisman2" value=3>火</label>
+                    <label><input type="radio" name="talisman2" value=4>水</label>
+                    <label><input type="radio" name="talisman2" value=5>木</label>
+                    <label><input type="radio" name="talisman2" value=6>金</label>
+                    <label><input type="radio" name="talisman2" value=7>土</label>
+                    <label><input type="radio" name="talisman2" value=8>星</label>    
+                </td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>上昇率（％）</td>
+                <td><input id="talisman_up2" type="number" value=0 style="width: 50px;"></td>
+            </tr>
+            </form>
+        </table>
+        <table>
+            <form id="talismanGroup3">
+            <tr>
+                <td>③</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                    <label><input type="radio" name="talisman3" value=0 checked>通常</label>
+                    <label><input type="radio" name="talisman3" value=1>御札</label>
+                    <label><input type="radio" name="talisman3" value=2>エネ</label>
+                    <label><input type="radio" name="talisman3" value=3>肉</label>
+                    <label><input type="radio" name="talisman3" value=4>斬撃</label>
+                    <label><input type="radio" name="talisman3" value=5>ﾚｰｻﾞｰ</label>   
+                </td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>上昇率（％）</td>
+                <td><input id="talisman_up3" type="number" value=0 style="width: 50px;"></td>
+            </tr>
+            </form>
+        </table>
+        <table>
+            <form id="talismanGroup4">
+            <tr>
+                <td>④</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                    <label><input type="radio" name="talisman4" value=0 checked>通常</label>
+                    <label><input type="radio" name="talisman4" value=1>御札</label>
+                    <label><input type="radio" name="talisman4" value=2>エネ</label>
+                    <label><input type="radio" name="talisman4" value=3>肉</label>
+                    <label><input type="radio" name="talisman4" value=4>斬撃</label>
+                    <label><input type="radio" name="talisman4" value=5>ﾚｰｻﾞｰ</label>   
+                </td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>上昇率（％）</td>
+                <td><input id="talisman_up4" type="number" value=0 style="width: 50px;"></td>
+            </tr>
+            </form>
+        </table>
+        <table><tr><td><hr></td></tr></table>
+        <table>
+            <!--ブースト数選択の表-->
+            <form id="boostGroup">
+            <tr>
+                <td>★ブースト</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                    <label><input type="radio" name="boost" value=0>0.00</label>
+                    <label><input type="radio" name="boost" value=1 checked>1.00</label>
+                    <label><input type="radio" name="boost" value=2>2.00</label>
+                    <label><input type="radio" name="boost" value=3>3.00</label>
+                </td>
+            </tr>
+            </form>
+        </table>
+        <table><tr><td><hr></td></tr></table>
+        <table>
+            <tr>
+                <td>＜ダメージ期待値＞</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><button onclick="recalculation();">再計算</button></td>
+            </tr>
+            <tr>
+                <td>紫バフ無し</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td id="result_normal"></td>
+            </tr>
+            <tr>
+                <td>紫回避アップ</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td id="result_kaihi"></td>
+            </tr>
+            <tr>
+                <td>紫陽防アップ</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td id="result_youbou"></td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script src="./table and function.js"></script>
+
+</body>
+</html>
