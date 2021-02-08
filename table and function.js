@@ -252,7 +252,7 @@ function changeimage(){
     //キャラクターを選択
     var chara = document.querySelector("#character").value;
     var img = document.getElementById("image");
-    img.src = chara + ".png";
+    img.src = "/image/"+ chara + ".png";
 }
 
 
