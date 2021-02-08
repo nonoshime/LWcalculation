@@ -246,13 +246,20 @@ var lw_boost_table = [
 
 //-------------------------------ステータス表ここまで-------------------------------
 
-//画像表示
-changeimage();
-function changeimage(){
-    //キャラクターを選択
+//絵札画像表示
+change_talismanimage();
+function change_talismanimage(){
+    var Tname = document.querySelector("#talisman_name").value;
+    var timg = document.getElementById("Timage");
+    timg.src = "./talismanimage/"+ Tname + ".png";
+}
+
+//キャラ画像表示
+change_charaimage();
+function change_charaimage(){
     var chara = document.querySelector("#character").value;
-    var img = document.getElementById("image");
-    img.src = "./image/"+ chara + ".png";
+    var cimg = document.getElementById("Cimage");
+    cimg.src = "./charaimage/"+ chara + ".png";
 }
 
 
@@ -687,3 +694,10 @@ function recalculation(){
     document.getElementById("result_kaihi").innerHTML = Math.round(damage2);
     document.getElementById("result_youbou").innerHTML = Math.round(damage3);
 }
+
+
+
+
+
+
+
