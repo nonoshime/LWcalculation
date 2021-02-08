@@ -7,7 +7,7 @@
     <style>
         
         label{ margin-right: .5em; cursor: pointer; }
-        hr{ margin-top: 0.5em; margin-bottom: 0.5em; width: 700px; color: lithtgray;}
+        hr{ margin-top: 0.5em; margin-bottom: 0.5em; width: 800px; color: lithtgray;}
     </style>
 </head>
 
@@ -16,7 +16,13 @@
 
     <h1>東方LostWord Lunatic紫ダメージ計算</h1>
 
+    <p><a href="description.html">概要</a></p>
+
+    <table>
+    <tr>
+    <td valign="top">
         <table>
+            <tr><td>
             <!--キャラクターとレベル-->
             <tr>
                 <td>キャラ</td>
@@ -24,14 +30,28 @@
                     <select id="character">
                         <option value="博麗霊夢">博麗霊夢</option>
                         <option value="霧雨魔理沙">霧雨魔理沙</option>
-                        <option value="魂魄妖夢">魂魄妖夢</option>
+                        <option value="レミリア・スカーレット">レミリア・スカーレット</option>
+                        <option value="フランドール・スカーレット">フランドール・スカーレット</option>
+                        <option value="十六夜咲夜">十六夜咲夜</option>
+                        <option value="パチュリー・ノーレッジ">パチュリー・ノーレッジ</option>
+                        <option value="紅美鈴">紅美鈴</option>
+                        <option value="小悪魔">小悪魔</option>
+                        <option value="八雲紫">八雲紫</option>
                         <option value="西行寺幽々子">西行寺幽々子</option>
+                        <option value="魂魄妖夢">魂魄妖夢</option>
                         <option value="リリーホワイト">リリーホワイト</option>
+                        <option value="八雲藍">八雲藍</option>
+                        <option value="橙">橙</option>
+                        <option value="鈴仙・優曇華院・イナバ">鈴仙・優曇華院・イナバ</option>
+                        <option value="綿月豊姫">綿月豊姫</option>
+                        <option value="綿月依姫">綿月依姫</option>
                     </select>
                 </td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td>レベル</td>
                 <td><input id="level" type="number" value=100 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><button onclick="changeimage()">画像切替</button></td>
             </tr>
             <!--覚醒-->
             <tr>
@@ -57,7 +77,7 @@
                     </select>
                 </td>
             </tr>
-
+            </td></tr>
         </table>
 
         <table>
@@ -73,8 +93,8 @@
                 <td><input id="tairyoku_talisman" type="number" value=0 style="width: 70px;"></td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td>速力</td>
-                <td><input id="sokuryoku_chara" type="number" value=0 style="width: 70px;"></td>
-                <td><input id="sokuryoku_talisman" type="number" value=1000 style="width: 70px;"></td>
+                <td><input id="sokuryoku_chara" type="number" value=1000 style="width: 70px;"></td>
+                <td><input id="sokuryoku_talisman" type="number" value=0 style="width: 70px;"></td>
             </tr>
             <tr>     
                 <td>陽攻</td>
@@ -110,6 +130,8 @@
                 <td>クリ攻撃</td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td>クリ命中</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>速力</td>
             </tr>
             <tr>
                 <td>スキルによる上昇</td>
@@ -123,6 +145,8 @@
                 <td><input id="cri_kou_up_skill" type="number" value=0 style="width: 50px;"></td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td><input id="cri_meityu_up_skill" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="sokuryoku_up_skill" type="number" value=0 style="width: 50px;"></td>
             </tr>
             <tr>
                 <td>スペカによる上昇</td>
@@ -136,6 +160,8 @@
                 <td><input id="cri_kou_up_spell" type="number" value=0 style="width: 50px;"></td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td><input id="cri_meityu_up_spell" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="sokuryoku_up_spell" type="number" value=0 style="width: 50px;"></td>
             </tr>
             <tr>
                 <td>絵札による上昇</td>
@@ -149,6 +175,8 @@
                 <td><input id="cri_kou_up_talisman" type="number" value=0 style="width: 50px;"></td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td><input id="cri_meityu_up_talisman" type="number" value=0 style="width: 50px;"></td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td><input id="sokuryoku_up_talisman" type="number" value=0 style="width: 50px;"></td>
             </tr>
         </table>
         <table><tr><td><hr></td></tr></table>
@@ -267,7 +295,10 @@
                     <label><input type="radio" name="talisman3" value=2>エネ</label>
                     <label><input type="radio" name="talisman3" value=3>肉</label>
                     <label><input type="radio" name="talisman3" value=4>斬撃</label>
-                    <label><input type="radio" name="talisman3" value=5>ﾚｰｻﾞｰ</label>   
+                    <label><input type="radio" name="talisman3" value=5>ﾚｰｻﾞｰ</label>
+                    <label><input type="radio" name="talisman3" value=6>質量</label>
+                    <label><input type="radio" name="talisman3" value=7>光</label>
+                    <label><input type="radio" name="talisman3" value=8>流体</label>      
                 </td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td>上昇率（％）</td>
@@ -286,7 +317,10 @@
                     <label><input type="radio" name="talisman4" value=2>エネ</label>
                     <label><input type="radio" name="talisman4" value=3>肉</label>
                     <label><input type="radio" name="talisman4" value=4>斬撃</label>
-                    <label><input type="radio" name="talisman4" value=5>ﾚｰｻﾞｰ</label>   
+                    <label><input type="radio" name="talisman4" value=5>ﾚｰｻﾞｰ</label> 
+                    <label><input type="radio" name="talisman4" value=6>質量</label>
+                    <label><input type="radio" name="talisman4" value=7>光</label>
+                    <label><input type="radio" name="talisman4" value=8>流体</label>      
                 </td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td>上昇率（％）</td>
@@ -333,6 +367,15 @@
                 <td id="result_youbou"></td>
             </tr>
         </table>
+    </td>
+    <td><br></td>
+    <td valign="top">
+        <table>
+            <tr><td><img id="image" src="https://lw-calculation.vercel.app/image/博麗霊夢.png" style="width: 600px;"></td></tr>
+        </table>
+    </td>
+    </tr>
+    </table>
 
     </div>
 
